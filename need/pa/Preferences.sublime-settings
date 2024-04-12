@@ -1,0 +1,10 @@
+{
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"color_scheme": "ayu-dark.sublime-color-scheme",
+	"theme": "ayu-dark.sublime-theme",
+	"font_face": "Consolas",
+	"font_size": 17,
+}
