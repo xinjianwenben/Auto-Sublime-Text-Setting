@@ -6,6 +6,15 @@ namespace wzk{
 	int in;
     char cwd[256];
 	string q="";
+	void run(vector<string>vec){
+		string s="";
+		for(int i=0;i<(int)vec.size();i++) s+=vec[i];
+		const char *c=s.c_str();
+		system(c);
+	}
+	char username[256];
+	DWORD cache=256;
+	void debug(){cerr<<username<<' '<<q<<'\n';}
 	int main(){
 		// freopen(".in","r",stdin);
 		// freopen(".out","w",stdout);
@@ -14,19 +23,15 @@ namespace wzk{
 			if(cwd[i]==':') break;
 			q+=cwd[i];
 		}
-		// cerr<<"C:\\Windows\\System32\\xcopy.exe \""+q+":\\need\" \"D:\\need\" /S /I"<<'\n';
+		GetUserName(username,&cache);
 		printf("Do you need Mingw?(1/0)");
 		scanf("%d",&in);
-		string s="C:\\Windows\\System32\\xcopy.exe \""+q+":\\mingw\" \"D:\\mingw\" /S /I";
-		const char *c=s.c_str();
-		if(in) system(c);
-		s="C:\\Windows\\System32\\xcopy.exe \""+q+":\\need\" \"D:\\need\" /S /I";
-		const char *cc=s.c_str();
-		system(cc);
-		system("C:\\Windows\\System32\\xcopy.exe \"D:\\need\\ip\" \"C:\\Users\\admin\\AppData\\Roaming\\Sublime Text\\Installed Packages\" /S /I");
-		system("C:\\Windows\\System32\\xcopy.exe \"D:\\need\\lc\" \"C:\\Users\\admin\\AppData\\Roaming\\Sublime Text\\Local\" /S /I");
-		system("C:\\Windows\\System32\\xcopy.exe \"D:\\need\\pa\" \"C:\\Users\\admin\\AppData\\Roaming\\Sublime Text\\Packages\" /S /I");
-		system("rmdir \"D:\\need\" /S /Q");
+		if(in) run({"C:\\Windows\\System32\\xcopy.exe \"",q,":\\mingw\" \"D:\\mingw\" /S /I"});
+		run({"C:\\Windows\\System32\\xcopy.exe \"",q,":\\need\" \"D:\\need\" /S /I"});
+		run({"C:\\Windows\\System32\\xcopy.exe \"D:\\need\\ip\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Installed Packages\" /S /I"});
+		run({"C:\\Windows\\System32\\xcopy.exe \"D:\\need\\lc\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Local\" /S /I"});
+		run({"C:\\Windows\\System32\\xcopy.exe \"D:\\need\\pa\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Packages\" /S /I"});
+		run({"rmdir \"D:\\need\" /S /Q"});
 		return 0;
 	}
 }
