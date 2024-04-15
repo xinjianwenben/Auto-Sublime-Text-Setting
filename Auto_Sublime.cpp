@@ -2,20 +2,20 @@
 #include<windows.h>
 #include<direct.h>
 using namespace std;
-namespace wzk{
+namespace estidi{
 	int in;
     char cwd[256];
 	string q="";
 	void run(vector<string>vec){
 		string s="";
 		for(int i=0;i<(int)vec.size();i++) s+=vec[i];
-		const char *c=s.c_str();
-		system(c);
+//		cout<<">"<<s<<endl;
+		system(s.c_str());
 	}
 	char username[256];
 	DWORD cache=256;
 	void debug(){cerr<<username<<' '<<q<<'\n';}
-	int main(){
+	int main(int argc,char ** argv){
 		// freopen(".in","r",stdin);
 		// freopen(".out","w",stdout);
         _getcwd(cwd,256);
@@ -24,18 +24,19 @@ namespace wzk{
 			q+=cwd[i];
 		}
 		GetUserName(username,&cache);
+		string path=q+":\\need";
+		if(argc>1)
+			path=argv[1];
 		printf("Do you need Mingw?(1/0)");
 		scanf("%d",&in);
 		if(in) run({"C:\\Windows\\System32\\xcopy.exe \"",q,":\\mingw\" \"D:\\mingw\" /S /I"});
-		run({"C:\\Windows\\System32\\xcopy.exe \"",q,":\\need\" \"D:\\need\" /S /I"});
-		run({"C:\\Windows\\System32\\xcopy.exe \"D:\\need\\ip\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Installed Packages\" /S /I"});
-		run({"C:\\Windows\\System32\\xcopy.exe \"D:\\need\\lc\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Local\" /S /I"});
-		run({"C:\\Windows\\System32\\xcopy.exe \"D:\\need\\pa\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Packages\" /S /I"});
-		run({"rmdir \"D:\\need\" /S /Q"});
+		run({"C:\\Windows\\System32\\xcopy.exe \"",path,"\\ip\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Installed Packages\" /S /I"});
+		run({"C:\\Windows\\System32\\xcopy.exe \"",path,"\\lc\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Local\" /S /I"});
+		run({"C:\\Windows\\System32\\xcopy.exe \"",path,"\\pa\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Packages\" /S /I"});
+		run({"pause"});
 		return 0;
 	}
 }
-int main(){
-	return wzk::main();
+int main(int argc,char ** argv){
+	return estidi::main(argc,argv);
 }
-//Good night.
