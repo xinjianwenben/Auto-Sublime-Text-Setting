@@ -30,9 +30,11 @@ namespace estidi{
 		printf("Do you need Mingw?(1/0)");
 		scanf("%d",&in);
 		if(in) run({"C:\\Windows\\System32\\xcopy.exe \"",q,":\\mingw\" \"D:\\mingw\" /S /I"});
-		run({"C:\\Windows\\System32\\xcopy.exe \"",path,"\\ip\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Installed Packages\" /S /I"});
-		run({"C:\\Windows\\System32\\xcopy.exe \"",path,"\\lc\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Local\" /S /I"});
-		run({"C:\\Windows\\System32\\xcopy.exe \"",path,"\\pa\" \"C:\\Users\\",username,"\\AppData\\Roaming\\Sublime Text\\Packages\" /S /I"});
+		if(system("cd \"Sublime Text\"")){
+			run({"cd .."});
+			run({"rmdir \"Sublime Text\""});
+		}
+		run({"C:\\Windows\\System32\\xcopy.exe \"",path,"\\Sublime Text\" \"C:\\Users\\",username,"\\AppData\\Roaming\" /S /I"});
 		run({"pause"});
 		return 0;
 	}
