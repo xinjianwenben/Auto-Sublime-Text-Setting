@@ -34,7 +34,7 @@ namespace estidi{
 		scanf("%d",&in);
 		if(in) run({"C:\\Windows\\System32\\xcopy.exe \"",q,"\\mingw\" \"D:\\mingw\" /S /I"},0);
 		run({"C:\\Users\\",username,"\\AppData\\Roaming"},1);
-		if(!system("cd \"Sublime Text\"")) run({"rmdir \"Sublime Text\" /S /Q"},0);
+		if(!system("cd \"Sublime Text\" 2>nul")) run({"rmdir \"Sublime Text\" /S /Q"},0);
 		run({q},1);
 		run({"C:\\Windows\\System32\\xcopy.exe \"",path,"\" \"C:\\Users\\",username,"\\AppData\\Roaming\" /S /I"},0);
 		run({"pause"},0);
